@@ -14,10 +14,44 @@ $(function() {
         console.log(message);
     };
     
-
-	$(document).on("vmousedown", "#steer_button", function(){
+	$(document).on("vmousedown", ".steer_forward_1", function(){
 		console.log("vmousedown");
-		chatsock.send("vmousedown");
+		chatsock.send("steer_forward_1");
+	});
+	
+	$(document).on("vmouseup", ".steer_forward_1", function(){
+		console.log("vmouseup");
+		chatsock.send("stop_steer_forward_1");
+	});
+	
+	$(document).on("vmousedown", ".steer_forward_2", function(){
+		console.log("vmousedown");
+		chatsock.send("steer_forward_2");
+	});
+	
+	$(document).on("vmouseup", ".steer_forward_2", function(){
+		console.log("vmouseup");
+		chatsock.send("stop_steer_forward_2");
+	});
+	
+	$(document).on("vmousedown", ".steer_forward_3", function(){
+		console.log("vmousedown");
+		chatsock.send("steer_forward_3");
+	});
+	
+	$(document).on("vmouseup", ".steer_forward_3", function(){
+		console.log("vmouseup");
+		chatsock.send("stop_steer_forward_3");
+	});
+	
+		$(document).on("vmousedown", ".steer_forward_left_1", function(){
+		console.log("vmousedown");
+		chatsock.send("steer_forward_left_1");
+	});
+	
+	$(document).on("vmouseup", ".steer_forward_left_1", function(){
+		console.log("vmouseup");
+		chatsock.send("stop_steer_forward_left_1");
 	});
 
 });
