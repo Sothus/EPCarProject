@@ -31,7 +31,9 @@ ALLOWED_HOSTS = ['localhost', '192.168.1.105']
 # Application definition
 
 INSTALLED_APPS = [
+	'steercar',
 	'jqmtest',
+	'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -120,3 +122,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static/'),)
+
+CHANNEL_LAYERS = {
+	"default": {
+		"BACKEND": "asgi_redis.RedisChannelLayer",
+		"CONFIG": {
+			"hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
+		},
+		"ROUTING": "steercar.routing.channel_routing",
+	},
+}
