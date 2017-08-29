@@ -1,5 +1,6 @@
 from channels import Group
 import pigpio
+import os
 import time
 
 SPEED = 14
@@ -51,13 +52,129 @@ def ws_message(message):
 		pi.set_PWM_dutycycle(SPEED, 0)
 		
 	elif(message['text'] == "steer_forward_left_1"):
-		pi.set_PWM_dutycycle(SPEED, 100)
-		pi.set_PWM_dutycycle(STEER, 250)
 		pi.write(STEER_DIRECTION, 1)
+		pi.set_PWM_dutycycle(STEER, 250)
+		
+		pi.set_PWM_dutycycle(SPEED, 100)
+
 		
 	elif(message['text'] == "stop_steer_forward_left_1"):
 		pi.set_PWM_dutycycle(SPEED, 0)
 		pi.set_PWM_dutycycle(STEER, 0)
+		
+	elif(message['text'] == "steer_forward_left_2"):
+		#os.system("pigs w 24 1")
+		#os.system("pigs p 23 250")
+		pi.write(STEER_DIRECTION, 1)
+		pi.set_PWM_dutycycle(STEER, 250)
+		time.sleep(0.02)	
+		pi.set_PWM_dutycycle(SPEED, 200)
+		
+	elif(message['text'] == "stop_steer_forward_left_2"):
+		#os.system("pigs p 23 0")
+		#os.system("pigs w 24 0")
+		
+		
+		pi.set_PWM_dutycycle(SPEED, 0)
+		pi.set_PWM_dutycycle(STEER, 0)
+		
+	elif(message['text'] == "steer_forward_right_1"):
+		pi.write(STEER_DIRECTION, 0)
+		pi.set_PWM_dutycycle(STEER, 250)
+		
+		pi.set_PWM_dutycycle(SPEED, 100)
+		
+		
+	elif(message['text'] == "stop_steer_forward_right_1"):
+		pi.set_PWM_dutycycle(SPEED, 0)
+		pi.set_PWM_dutycycle(STEER, 0)
+		
+	elif(message['text'] == "steer_forward_right_2"):
+		pi.write(STEER_DIRECTION, 0)
+		pi.set_PWM_dutycycle(STEER, 250)
+		
+		pi.set_PWM_dutycycle(SPEED, 250)
+		
+		
+	elif(message['text'] == "stop_steer_forward_right_2"):
+		pi.set_PWM_dutycycle(SPEED, 0)
+		pi.set_PWM_dutycycle(STEER, 0)
+		
+	elif(message['text'] == "steer_backward_1"):
+		pi.write(DIRECTION, 1)
+		pi.set_PWM_dutycycle(SPEED, 100)
+		
+	elif(message['text'] == "stop_steer_backward_1"):
+		pi.set_PWM_dutycycle(SPEED, 0)
+		pi.write(DIRECTION, 0)
+		
+	elif(message['text'] == "steer_backward_2"):
+		pi.set_PWM_dutycycle(SPEED, 150)
+		pi.write(DIRECTION, 1)
+		
+	elif(message['text'] == "stop_steer_backward_2"):
+		pi.set_PWM_dutycycle(SPEED, 0)
+		pi.write(DIRECTION, 0)
+		
+	elif(message['text'] == "steer_backward_3"):
+		pi.set_PWM_dutycycle(SPEED, 250)
+		pi.write(DIRECTION, 1)
+		
+	elif(message['text'] == "stop_steer_backward_3"):
+		pi.set_PWM_dutycycle(SPEED, 0)
+		pi.write(DIRECTION, 0)
+		
+	elif(message['text'] == "steer_backward_left_1"):
+		pi.write(STEER_DIRECTION, 1)
+		pi.set_PWM_dutycycle(STEER, 250)
+		
+		pi.set_PWM_dutycycle(SPEED, 100)
+		
+		pi.write(DIRECTION, 1)
+		
+	elif(message['text'] == "stop_steer_backward_left_1"):
+		pi.set_PWM_dutycycle(SPEED, 0)
+		pi.set_PWM_dutycycle(STEER, 0)
+		pi.write(DIRECTION, 0)
+		
+	elif(message['text'] == "steer_backward_left_2"):
+		pi.write(STEER_DIRECTION, 1)
+		pi.set_PWM_dutycycle(STEER, 250)
+		
+		pi.set_PWM_dutycycle(SPEED, 200)
+		
+		pi.write(DIRECTION, 1)
+		
+	elif(message['text'] == "stop_steer_backward_left_2"):
+		pi.set_PWM_dutycycle(SPEED, 0)
+		pi.set_PWM_dutycycle(STEER, 0)
+		pi.write(DIRECTION, 0)
+		
+	elif(message['text'] == "steer_backward_right_1"):
+		pi.write(STEER_DIRECTION, 0)
+		pi.set_PWM_dutycycle(STEER, 250)
+		
+		pi.set_PWM_dutycycle(SPEED, 100)
+		
+		pi.write(DIRECTION, 1)
+		
+	elif(message['text'] == "stop_steer_backward_right_1"):
+		pi.set_PWM_dutycycle(SPEED, 0)
+		pi.set_PWM_dutycycle(STEER, 0)
+		pi.write(DIRECTION, 0)
+		
+	elif(message['text'] == "steer_backward_right_2"):
+		pi.write(STEER_DIRECTION, 0)
+		pi.set_PWM_dutycycle(STEER, 250)
+		
+		pi.set_PWM_dutycycle(SPEED, 250)
+		
+		pi.write(DIRECTION, 1)
+		
+	elif(message['text'] == "stop_steer_backward_right_2"):
+		pi.set_PWM_dutycycle(SPEED, 0)
+		pi.set_PWM_dutycycle(STEER, 0)
+		pi.write(DIRECTION, 0)
 	
 def ws_disconnect(message):
 	print('ws_disconnect')

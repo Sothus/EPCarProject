@@ -44,7 +44,7 @@ $(function() {
 		chatsock.send("stop_steer_forward_3");
 	});
 	
-		$(document).on("vmousedown", ".steer_forward_left_1", function(){
+	$(document).on("vmousedown", ".steer_forward_left_1", function(){
 		console.log("vmousedown");
 		chatsock.send("steer_forward_left_1");
 	});
@@ -52,6 +52,106 @@ $(function() {
 	$(document).on("vmouseup", ".steer_forward_left_1", function(){
 		console.log("vmouseup");
 		chatsock.send("stop_steer_forward_left_1");
+	});
+	
+	$(document).on("vmousedown", ".steer_forward_left_2", function(){
+		console.log("vmousedown");
+		chatsock.send("steer_forward_left_2");
+	});
+	
+	$(document).on("vmouseup", ".steer_forward_left_2", function(){
+		console.log("vmouseup");
+		chatsock.send("stop_steer_forward_left_2");
+	});
+	
+	$(document).on("vmousedown", ".steer_forward_right_1", function(){
+		console.log("vmousedown");
+		chatsock.send("steer_forward_right_1");
+	});
+	
+	$(document).on("vmouseup", ".steer_forward_right_1", function(){
+		console.log("vmouseup");
+		chatsock.send("stop_steer_forward_right_1");
+	});
+	
+	$(document).on("vmousedown", ".steer_forward_right_2", function(){
+		console.log("vmousedown");
+		chatsock.send("steer_forward_right_2");
+	});
+	
+	$(document).on("vmouseup", ".steer_forward_right_2", function(){
+		console.log("vmouseup");
+		chatsock.send("stop_steer_forward_right_2");
+	});
+	
+	$(document).on("vmousedown", ".steer_backward_1", function(){
+		console.log("vmousedown");
+		chatsock.send("steer_backward_1");
+	});
+	
+	$(document).on("vmouseup", ".steer_backward_1", function(){
+		console.log("vmouseup");
+		chatsock.send("stop_steer_backward_1");
+	});
+	
+	$(document).on("vmousedown", ".steer_backward_2", function(){
+		console.log("vmousedown");
+		chatsock.send("steer_backward_2");
+	});
+	
+	$(document).on("vmouseup", ".steer_backward_2", function(){
+		console.log("vmouseup");
+		chatsock.send("stop_steer_backward_2");
+	});
+	
+	$(document).on("vmousedown", ".steer_backward_3", function(){
+		console.log("vmousedown");
+		chatsock.send("steer_backward_3");
+	});
+	
+	$(document).on("vmouseup", ".steer_backward_3", function(){
+		console.log("vmouseup");
+		chatsock.send("stop_steer_backward_3");
+	});
+	
+	$(document).on("vmousedown", ".steer_backward_left_1", function(){
+		console.log("vmousedown");
+		chatsock.send("steer_backward_left_1");
+	});
+	
+	$(document).on("vmouseup", ".steer_backward_left_1", function(){
+		console.log("vmouseup");
+		chatsock.send("stop_steer_backward_left_1");
+	});
+	
+	$(document).on("vmousedown", ".steer_backward_left_2", function(){
+		console.log("vmousedown");
+		chatsock.send("steer_backward_left_2");
+	});
+	
+	$(document).on("vmouseup", ".steer_backward_left_2", function(){
+		console.log("vmouseup");
+		chatsock.send("stop_steer_backward_left_2");
+	});
+	
+	$(document).on("vmousedown", ".steer_backward_right_1", function(){
+		console.log("vmousedown");
+		chatsock.send("steer_backward_right_1");
+	});
+	
+	$(document).on("vmouseup", ".steer_backward_right_1", function(){
+		console.log("vmouseup");
+		chatsock.send("stop_steer_backward_right_1");
+	});
+	
+	$(document).on("vmousedown", ".steer_backward_right_2", function(){
+		console.log("vmousedown");
+		chatsock.send("steer_backward_right_2");
+	});
+	
+	$(document).on("vmouseup", ".steer_backward_right_2", function(){
+		console.log("vmouseup");
+		chatsock.send("stop_steer_backward_right_2");
 	});
 
 });
