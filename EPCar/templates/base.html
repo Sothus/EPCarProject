@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		
+		<link rel="stylesheet" href='{% static "style.css" %}'>
+	</head>
+	
+	<body>
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">EPCarProject</a>
+				</div>
+				<ul class="nav navbar-nav">
+					<li {% block active_home %}{% endblock active_home %}><a href="#">Home</a></li>
+					<li {% block active_news %}{% endblock active_news %}><a href="#">News</a></li>
+					<li {% block active_cars %}{% endblock active_cars %}><a href="#">Cars</a></li>
+					<li {% block active_about %}{% endblock active_about %}><a href="#">About</a></li>
+					<li {% block active_contact %}{% endblock active_contact %}><a href="#">Contact</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+				</ul>
+			</div>
+		</nav>
+		
+		{% block content %}		
+		{% endblock content %}
+		
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>	
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript" src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+		<script type="text/javascript" src='{% static "reconnecting-websocket.min.js" %}'></script>
+		<script type="text/javascript" src='{% static "steercar.js" %}'></script>
+	</body>
+	
+	<script>
+		$(function() {
+			$(document).on("vmousedown", "#ledon", function(){
+				console.log("vmousedown");
+				alert("vmousedown");
+			});
+		});
+	</script>
+
+</html>

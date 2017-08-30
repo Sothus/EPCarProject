@@ -32,7 +32,6 @@ ALLOWED_HOSTS = ['localhost', '192.168.1.105', '192.168.1.106']
 
 INSTALLED_APPS = [
 	'steercar',
-	'jqmtest',
 	'channels',
     'django.contrib.admin',
     'django.contrib.auth',

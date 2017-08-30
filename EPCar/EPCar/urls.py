@@ -15,11 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from jqmtest.views import TestView
-from steercar.views import SteerView
+from steercar.views import SteerView, HomeView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', TestView.as_view()),
+    url(r'^$', HomeView.as_view()),
     url(r'^steercar', SteerView.as_view()),
 ]
