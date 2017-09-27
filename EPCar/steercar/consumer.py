@@ -1,24 +1,7 @@
 from channels import Group
-import pigpio
-import os
-import time
+import pigpio, os, time
 
-SPEED = 14
-DIRECTION = 15
-STEER = 23
-STEER_DIRECTION = 24
-MODE = 25
-pi = pigpio.pi()
-pi.set_mode(SPEED, pigpio.OUTPUT)
-pi.set_mode(DIRECTION, pigpio.OUTPUT)
-pi.set_mode(STEER, pigpio.OUTPUT)
-pi.set_mode(STEER_DIRECTION, pigpio.OUTPUT)
-pi.set_mode(MODE, pigpio.OUTPUT)
-pi.write(MODE, 1)
-pi.write(DIRECTION, 0)
-pi.write(STEER, 0)
-pi.write(STEER_DIRECTION, 0)
-pi.write(SPEED, 0)
+controlled_car = car.Car()
 
 def ws_connect(message):
 	print('ws_connect')
@@ -30,144 +13,112 @@ def ws_connect(message):
 		"text": "You're connected to steercar group",
 	})
 
+#TODO - Check valid values for directions
 def ws_message(message):
-	print('ws_message')
-	print("Received!" + message['text'])
+    global controlled_car
+
+    print('ws_message')
+    print("Received!" + message['text'])
 	
-	if(message['text'] == "steer_forward_1"):
-		pi.set_PWM_dutycycle(SPEED, 100)
+    if(message['text'] == "steer_forward_1"):
+        controlled_car.move(100, 1)
 		
-	elif(message['text'] == "stop_steer_forward_1"):
-		pi.set_PWM_dutycycle(SPEED, 0)
+    elif(message['text'] == "stop_steer_forward_1"):
+        controlled_car.stop_move()
 		
-	elif(message['text'] == "steer_forward_2"):
-		pi.set_PWM_dutycycle(SPEED, 150)
+    elif(message['text'] == "steer_forward_2"):
+        controlled_car.move(150, 1)
 		
-	elif(message['text'] == "stop_steer_forward_2"):
-		pi.set_PWM_dutycycle(SPEED, 0)
+    elif(message['text'] == "stop_steer_forward_2"):
+        controlled_car.stop_move()
 		
-	elif(message['text'] == "steer_forward_3"):
-		pi.set_PWM_dutycycle(SPEED, 250)
+    elif(message['text'] == "steer_forward_3"):
+        controlled_car.move(250, 1)
 		
-	elif(message['text'] == "stop_steer_forward_3"):
-		pi.set_PWM_dutycycle(SPEED, 0)
+    elif(message['text'] == "stop_steer_forward_3"):
+        controlled_car.stop_move()
 		
-	elif(message['text'] == "steer_forward_left_1"):
-		pi.write(STEER_DIRECTION, 1)
-		pi.set_PWM_dutycycle(STEER, 250)
-		time.sleep(0.02)
-		pi.set_PWM_dutycycle(SPEED, 100)
+    elif(message['text'] == "steer_forward_left_1"):
+        controlled_car.turn(250, 1)
+        controlled_car.move(100, 1)		
 		
-	elif(message['text'] == "stop_steer_forward_left_1"):
-		pi.write(STEER_DIRECTION, 0)
-		pi.set_PWM_dutycycle(STEER, 0)
-		pi.set_PWM_dutycycle(SPEED, 0)	
+    elif(message['text'] == "stop_steer_forward_left_1"):
+        controlled_car.stop_move()
+        controlled_car.reset_turn()
 		
-	elif(message['text'] == "steer_forward_left_2"):
-		pi.write(STEER_DIRECTION, 1)
-		pi.set_PWM_dutycycle(STEER, 250)
-		time.sleep(0.02)	
-		pi.set_PWM_dutycycle(SPEED, 200)
+    elif(message['text'] == "steer_forward_left_2"):
+        controlled_car.turn(250, 1)
+        controlled_car.move(200, 1)	
 		
-	elif(message['text'] == "stop_steer_forward_left_2"):
-		pi.set_PWM_dutycycle(SPEED, 0)
-		pi.set_PWM_dutycycle(STEER, 0)
+    elif(message['text'] == "stop_steer_forward_left_2"):
+        controlled_car.stop_move()
+        controlled_car.reset_turn()
 		
-	elif(message['text'] == "steer_forward_right_1"):
-		pi.write(STEER_DIRECTION, 0)
-		pi.set_PWM_dutycycle(STEER, 250)
-		pi.set_PWM_dutycycle(SPEED, 100)
+    elif(message['text'] == "steer_forward_right_1"):
+        controlled_car.turn(250, 0)
+        controlled_car.move(100, 1)	
 		
-	elif(message['text'] == "stop_steer_forward_right_1"):
-		pi.set_PWM_dutycycle(SPEED, 0)
-		pi.set_PWM_dutycycle(STEER, 0)
+    elif(message['text'] == "stop_steer_forward_right_1"):
+        controlled_car.stop_move()
+        controlled_car.reset_turn()
 		
-	elif(message['text'] == "steer_forward_right_2"):
-		pi.write(STEER_DIRECTION, 0)
-		pi.set_PWM_dutycycle(STEER, 250)
+    elif(message['text'] == "steer_forward_right_2"):
+        controlled_car.turn(250, 0)
+        controlled_car.move(250, 1)	
 		
-		pi.set_PWM_dutycycle(SPEED, 250)
+    elif(message['text'] == "stop_steer_forward_right_2"):
+        controlled_car.stop_move()
+        controlled_car.reset_turn()
 		
+    elif(message['text'] == "steer_backward_1"):
+        controlled_car.move(100, 0)	
+				
+    elif(message['text'] == "stop_steer_backward_1"):
+        controlled_car.stop_move()
 		
-	elif(message['text'] == "stop_steer_forward_right_2"):
-		pi.set_PWM_dutycycle(SPEED, 0)
-		pi.set_PWM_dutycycle(STEER, 0)
+    elif(message['text'] == "steer_backward_2"):
+        controlled_car.move(150, 0)
 		
-	elif(message['text'] == "steer_backward_1"):
-		pi.write(DIRECTION, 1)
-		pi.set_PWM_dutycycle(SPEED, 100)
+    elif(message['text'] == "stop_steer_backward_2"):
+        controlled_car.stop_move()
 		
-	elif(message['text'] == "stop_steer_backward_1"):
-		pi.set_PWM_dutycycle(SPEED, 0)
-		pi.write(DIRECTION, 0)
+    elif(message['text'] == "steer_backward_3"):
+        controlled_car.move(250, 0)
 		
-	elif(message['text'] == "steer_backward_2"):
-		pi.set_PWM_dutycycle(SPEED, 150)
-		pi.write(DIRECTION, 1)
+    elif(message['text'] == "stop_steer_backward_3"):
+        controlled_car.stop_move()
 		
-	elif(message['text'] == "stop_steer_backward_2"):
-		pi.set_PWM_dutycycle(SPEED, 0)
-		pi.write(DIRECTION, 0)
+    elif(message['text'] == "steer_backward_left_1"):
+        controlled_car.turn(250, 1)
+        controlled_car.move(100, 1)	
 		
-	elif(message['text'] == "steer_backward_3"):
-		pi.set_PWM_dutycycle(SPEED, 250)
-		pi.write(DIRECTION, 1)
+    elif(message['text'] == "stop_steer_backward_left_1"):
+        controlled_car.stop_move()
+        controlled_car.reset_turn()
 		
-	elif(message['text'] == "stop_steer_backward_3"):
-		pi.set_PWM_dutycycle(SPEED, 0)
-		pi.write(DIRECTION, 0)
+    elif(message['text'] == "steer_backward_left_2"):
+        controlled_car.turn(250, 1)
+        controlled_car.move(200, 1)	
 		
-	elif(message['text'] == "steer_backward_left_1"):
-		pi.write(STEER_DIRECTION, 1)
-		pi.set_PWM_dutycycle(STEER, 250)
+    elif(message['text'] == "stop_steer_backward_left_2"):
+        controlled_car.stop_move()
+        controlled_car.reset_turn()
 		
-		pi.set_PWM_dutycycle(SPEED, 100)
+    elif(message['text'] == "steer_backward_right_1"):
+        controlled_car.turn(250, 0)
+        controlled_car.move(100, 1)	
 		
-		pi.write(DIRECTION, 1)
+    elif(message['text'] == "stop_steer_backward_right_1"):
+        controlled_car.stop_move()
+        controlled_car.reset_turn()
 		
-	elif(message['text'] == "stop_steer_backward_left_1"):
-		pi.set_PWM_dutycycle(SPEED, 0)
-		pi.set_PWM_dutycycle(STEER, 0)
-		pi.write(DIRECTION, 0)
+    elif(message['text'] == "steer_backward_right_2"):
+        controlled_car.turn(250, 0)
+        controlled_car.move(250, 1)	
 		
-	elif(message['text'] == "steer_backward_left_2"):
-		pi.write(STEER_DIRECTION, 1)
-		pi.set_PWM_dutycycle(STEER, 250)
-		
-		pi.set_PWM_dutycycle(SPEED, 200)
-		
-		pi.write(DIRECTION, 1)
-		
-	elif(message['text'] == "stop_steer_backward_left_2"):
-		pi.set_PWM_dutycycle(SPEED, 0)
-		pi.set_PWM_dutycycle(STEER, 0)
-		pi.write(DIRECTION, 0)
-		
-	elif(message['text'] == "steer_backward_right_1"):
-		pi.write(STEER_DIRECTION, 0)
-		pi.set_PWM_dutycycle(STEER, 250)
-		
-		pi.set_PWM_dutycycle(SPEED, 100)
-		
-		pi.write(DIRECTION, 1)
-		
-	elif(message['text'] == "stop_steer_backward_right_1"):
-		pi.set_PWM_dutycycle(SPEED, 0)
-		pi.set_PWM_dutycycle(STEER, 0)
-		pi.write(DIRECTION, 0)
-		
-	elif(message['text'] == "steer_backward_right_2"):
-		pi.write(STEER_DIRECTION, 0)
-		pi.set_PWM_dutycycle(STEER, 250)
-		
-		pi.set_PWM_dutycycle(SPEED, 250)
-		
-		pi.write(DIRECTION, 1)
-		
-	elif(message['text'] == "stop_steer_backward_right_2"):
-		pi.set_PWM_dutycycle(SPEED, 0)
-		pi.set_PWM_dutycycle(STEER, 0)
-		pi.write(DIRECTION, 0)
+    elif(message['text'] == "stop_steer_backward_right_2"):
+        controlled_car.stop_move()
+        controlled_car.reset_turn()
 	
 def ws_disconnect(message):
 	print('ws_disconnect')
