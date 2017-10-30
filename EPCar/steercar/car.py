@@ -18,11 +18,11 @@ class Car:
 		self.pi = pigpio.pi()
 		
 		print("Initialisation started")
-		pi.set_mode(self.speed_pin, pigpio.OUTPUT)
-		pi.set_mode(self.speed_direction_pin, pigpio.OUTPUT)
-		pi.set_mode(self.steer_pin, pigpio.OUTPUT)
-		pi.set_mode(self.steer_direction_pin, pigpio.OUTPUT)
-		pi.set_mode(self.mode_pin, pigpio.OUTPUT)
+		self.pi.set_mode(self.speed_pin, pigpio.OUTPUT)
+		self.pi.set_mode(self.speed_direction_pin, pigpio.OUTPUT)
+		self.pi.set_mode(self.steer_pin, pigpio.OUTPUT)
+		self.pi.set_mode(self.steer_direction_pin, pigpio.OUTPUT)
+		self.pi.set_mode(self.mode_pin, pigpio.OUTPUT)
 		print("Initialisation completed")
 		
 		

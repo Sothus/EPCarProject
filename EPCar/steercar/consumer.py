@@ -1,5 +1,5 @@
 from channels import Group
-import pigpio, os, time
+from steercar import car
 
 controlled_car = car.Car()
 
