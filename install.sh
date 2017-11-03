@@ -1,5 +1,7 @@
 #!/bin/bash
 #TODO add option to choose type of installation - dev or stand
+#daphne -b 192.168.1.105 -p 8001 EPCar.asgi:channel_layer
+#python3 manage.py runworker
 echo -e "\nUPDATING REPOSITORIES"
 apt-get update
 if [ $? -ne 0 ]
