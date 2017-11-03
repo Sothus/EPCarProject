@@ -11,3 +11,13 @@ source venv/bin/activate
 pip install -U pip
 pip install twisted[tls,http2] django channels asgi_redis websocket-client
 deactivate
+
+
+#Rzeczy potrzebne do zainstalowania Redis-servera z source-code
+#sudo apt-get install tcl
+#wget http://download.redis.io/redis-stable.tar.gz
+#tar xvzf redis-stable.tar.gz
+#cd redis-stable/
+#make -j4
+#make test
+#make install

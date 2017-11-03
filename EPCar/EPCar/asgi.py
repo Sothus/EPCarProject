@@ -1,5 +1,5 @@
 import os
 import channels.asgi
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "epcar.setting")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "EPCar.settings")
 channel_layer = channels.asgi.get_channel_layer()
