@@ -54,7 +54,7 @@ class Car:
 		time.sleep(0.02)
 		
 		
-	def reset_turn():
+	def reset_turn(self):
 		'''Reset steer wheels to deafult position'''
 		
 		self.pi.write(self.steer_direction_pin, 0)
