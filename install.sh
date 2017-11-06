@@ -202,7 +202,7 @@ then
 fi
 
 echo -e "\nINSTALLING TWISTED"
-pip3 install twisted[tls,http2]
+sudo pip3 install twisted[tls,http2]
 if [ $? -ne 0 ]
 then
 	echo -e "ERROR DURING TWISTED INSTALLATION"
